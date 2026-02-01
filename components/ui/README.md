@@ -121,6 +121,121 @@ import { Toggle } from '@/components/ui';
 />
 ```
 
+### Layout
+Layout components for structuring your application pages.
+
+```tsx
+import { Layout, Header, Sidebar, Content, LayoutWithSidebar } from '@/components/ui';
+
+// Simple layout
+<Layout>
+  <Header>Header Content</Header>
+  <Content>Main Content</Content>
+</Layout>
+
+// Layout with sidebar
+<LayoutWithSidebar
+  header={<Header>App Header</Header>}
+  sidebar={<Sidebar>Navigation Menu</Sidebar>}
+  sidebarCollapsed={false}
+>
+  <div>Page Content</div>
+</LayoutWithSidebar>
+```
+
+### Tabs
+Tab navigation component.
+
+```tsx
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui';
+
+<Tabs defaultValue="tab1" onTabChange={(tab) => console.log(tab)}>
+  <TabsList>
+    <TabsTrigger value="tab1">Tab 1</TabsTrigger>
+    <TabsTrigger value="tab2">Tab 2</TabsTrigger>
+  </TabsList>
+  <TabsContent value="tab1">Content for Tab 1</TabsContent>
+  <TabsContent value="tab2">Content for Tab 2</TabsContent>
+</Tabs>
+```
+
+### Menu
+Dropdown menu component.
+
+```tsx
+import { Menu, MenuItem, MenuGroup } from '@/components/ui';
+
+<Menu
+  trigger={<button>Open Menu</button>}
+  align="right"
+>
+  <MenuGroup label="Actions">
+    <MenuItem onClick={() => console.log('Edit')}>Edit</MenuItem>
+    <MenuItem onClick={() => console.log('Delete')}>Delete</MenuItem>
+  </MenuGroup>
+  <MenuItem divider />
+  <MenuItem onClick={() => console.log('Settings')}>Settings</MenuItem>
+</Menu>
+```
+
+### Table
+Responsive table component with mobile card view.
+
+```tsx
+import { Table, ResponsiveTable } from '@/components/ui';
+
+const columns = [
+  { key: 'id', header: 'ID' },
+  { key: 'name', header: 'Name' },
+  {
+    key: 'email',
+    header: 'Email',
+    render: (item) => <a href={`mailto:${item.email}`}>{item.email}</a>,
+  },
+];
+
+const data = [
+  { id: 1, name: 'John Doe', email: 'john@example.com' },
+  { id: 2, name: 'Jane Smith', email: 'jane@example.com' },
+];
+
+// Standard table
+<Table
+  data={data}
+  columns={columns}
+  onRowClick={(item) => console.log(item)}
+  emptyMessage="No users found"
+/>
+
+// Responsive table (shows cards on mobile)
+<ResponsiveTable
+  data={data}
+  columns={columns}
+  breakpoint="md"
+  mobileCardRender={(item) => (
+    <div className="bg-white p-4 rounded-lg shadow">
+      <h3>{item.name}</h3>
+      <p>{item.email}</p>
+    </div>
+  )}
+/>
+```
+
+### Tooltip
+Tooltip component with positioning.
+
+```tsx
+import { Tooltip } from '@/components/ui';
+
+<Tooltip
+  content="This is a helpful tooltip"
+  position="top"
+  delay={200}
+>
+  <button>Hover me</button>
+</Tooltip>
+```
+
 ## Features
 
 - ✅ Fully typed with TypeScript
@@ -129,4 +244,5 @@ import { Toggle } from '@/components/ui';
 - ✅ Error handling and validation
 - ✅ Consistent styling with Tailwind CSS
 - ✅ Reusable across the application
+- ✅ Mobile-first approach
 
