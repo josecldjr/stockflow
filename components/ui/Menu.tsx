@@ -100,9 +100,10 @@ export const Menu: React.FC<MenuProps> = ({
         >
           {React.Children.map(children, (child) => {
             if (React.isValidElement(child) && child.type === MenuItem) {
-              return React.cloneElement(child as React.ReactElement<MenuItemProps>, {
+              const menuItemChild = child as React.ReactElement<MenuItemProps>;
+              return React.cloneElement(menuItemChild, {
                 onClick: () => {
-                  child.props.onClick?.();
+                  menuItemChild.props.onClick?.();
                   handleMenuItemClick();
                 },
               });
