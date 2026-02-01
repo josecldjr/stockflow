@@ -37,12 +37,19 @@ export class UserRepository implements IUserRepository {
 
   async update(id: string, data: UpdateUserData): Promise<User | null> {
     try {
+      const updateData: { name?: string; organizationId?: string | null } = {}
+      
+      if (data.name !== undefined) {
+        updateData.name = data.name
+      }
+      
+      if (data.organizationId !== undefined) {
+        updateData.organizationId = data.organizationId || null
+      }
+
       return await this.prisma.user.update({
         where: { id },
-        data: {
-          name: data.name,
-          organizationId: data.organizationId
-        }
+        data: updateData
       })
     } catch {
       return null

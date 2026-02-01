@@ -110,7 +110,7 @@ export async function GET() {
 
     // Verificar se as tabelas principais existem
     const tables = ['users', 'organizations']
-    const tableStatus = {}
+    const tableStatus: Record<string, boolean> = {}
 
     for (const table of tables) {
       try {

@@ -1,4 +1,4 @@
-import { api, apiEndpoints } from '../api';
+import { api, apiEndpoints } from '../api-client';
 import type {
   Organization,
   CreateOrganizationData,

@@ -14,6 +14,7 @@ export interface IOrganizationRepository {
   findAll(): Promise<Organization[]>
   findById(id: string): Promise<Organization | null>
   findByName(name: string): Promise<Organization | null>
+  findByDocument(document: string): Promise<Organization | null>
   create(data: CreateOrganizationData): Promise<Organization>
   update(id: string, data: UpdateOrganizationData): Promise<Organization | null>
   delete(id: string): Promise<boolean>

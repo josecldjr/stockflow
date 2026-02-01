@@ -25,21 +25,36 @@ export class OrganizationRepository implements IOrganizationRepository {
     })
   }
 
+  async findByDocument(document: string): Promise<Organization | null> {
+    return await this.prisma.organization.findUnique({
+      where: { document }
+    })
+  }
+
   async create(data: CreateOrganizationData): Promise<Organization> {
     return await this.prisma.organization.create({
       data: {
-        name: data.name
+        name: data.name,
+        document: data.document
       }
     })
   }
 
   async update(id: string, data: UpdateOrganizationData): Promise<Organization | null> {
     try {
+      const updateData: { name?: string; document?: string | null } = {}
+      
+      if (data.name !== undefined) {
+        updateData.name = data.name
+      }
+      
+      if (data.document !== undefined) {
+        updateData.document = data.document || null
+      }
+
       return await this.prisma.organization.update({
         where: { id },
-        data: {
-          name: data.name
-        }
+        data: updateData
       })
     } catch {
       return null

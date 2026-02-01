@@ -1,6 +1,6 @@
 type RequestMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 
-interface RequestOptions extends RequestInit {
+interface RequestOptions extends Omit<RequestInit, 'body' | 'method'> {
   method?: RequestMethod;
   params?: Record<string, string | number | boolean>;
   body?: unknown;
