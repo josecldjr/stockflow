@@ -1,5 +1,77 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Database Setup
+
+This project uses **Prisma** with **PostgreSQL** for database management.
+
+### Prerequisites
+
+- Docker and Docker Compose
+- Node.js and pnpm
+
+### Database Setup
+
+1. **Start PostgreSQL with Docker Compose:**
+   ```bash
+   docker compose up -d
+   ```
+
+2. **Run database migrations:**
+   ```bash
+   npx prisma migrate dev --name init
+   ```
+
+3. **Generate Prisma client:**
+   ```bash
+   npx prisma generate
+   ```
+
+### Environment Variables
+
+The project uses the following environment variables (configured in `.env`):
+
+- `DATABASE_URL`: PostgreSQL connection string
+- `NEXTAUTH_SECRET`: Secret key for NextAuth.js
+- `NEXTAUTH_URL`: Base URL for the application
+
+## Architecture
+
+This project follows Clean Architecture principles with the following structure:
+
+### 📁 **types/** - Domain entities and interfaces
+- `user.ts` - User entity and data transfer objects
+- `organization.ts` - Organization entity and data transfer objects
+
+### 📁 **repositories/** - Data access layer
+- `interfaces.ts` - Repository contracts
+- `prisma/` - Concrete implementations using Prisma ORM
+  - `user-repository.ts` - User data operations
+  - `organization-repository.ts` - Organization data operations
+
+### 📁 **use-cases/** - Business logic layer
+- `users/` - User-related business operations
+  - `create-user.ts` - User creation logic
+  - `get-users.ts` - User listing logic
+
+### 📁 **container/** - Dependency injection
+- `index.ts` - Application container with instantiated services
+
+### 📁 **lib/** - Infrastructure utilities
+- `prisma.ts` - Database connection and Prisma client setup
+
+### 📁 **app/api/** - API routes (Presentation layer)
+- Uses use cases for business logic, keeping controllers thin
+
+### Prisma Studio
+
+To view and edit your database data:
+
+```bash
+npx prisma studio
+```
+
+This will open a web interface at `http://localhost:5555`.
+
 ## Getting Started
 
 First, run the development server:
