@@ -11,7 +11,8 @@ async function main() {
     update: {},
     create: {
       email: 'admin@stockflow.com',
-      name: 'Admin User'
+      name: 'Admin User',
+      password: 'password123'
     }
   })
 
@@ -20,7 +21,8 @@ async function main() {
     update: {},
     create: {
       email: 'user@stockflow.com',
-      name: 'Regular User'
+      name: 'Regular User',
+      password: 'password123'
     }
   })
 
