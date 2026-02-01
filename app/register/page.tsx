@@ -20,6 +20,7 @@ export default function RegisterPage() {
   // User form state
   const [userData, setUserData] = useState<CreateUserData>({
     email: '',
+    password: '',
     name: '',
   });
 
@@ -122,6 +123,20 @@ export default function RegisterPage() {
                   setUserData({ ...userData, name: e.target.value })
                 }
                 disabled={loading}
+              />
+
+              <Input
+                id="password"
+                type="password"
+                label="Password"
+                placeholder="Enter your password"
+                required
+                value={userData.password}
+                onChange={(e) =>
+                  setUserData({ ...userData, password: e.target.value })
+                }
+                disabled={loading}
+                helperText="Password must be at least 6 characters"
               />
             </div>
 

@@ -19,7 +19,7 @@ export async function GET() {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
-    const { email, name, organizationId } = body
+    const { email, password, name, organizationId } = body
 
     if (!email) {
       return NextResponse.json(
@@ -28,8 +28,16 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    if (!password) {
+      return NextResponse.json(
+        { error: 'Password is required' },
+        { status: 400 }
+      )
+    }
+
     const user = await createUserUseCase.execute({
       email,
+      password,
       name,
       organizationId
     })
@@ -51,6 +59,13 @@ export async function POST(request: NextRequest) {
         return NextResponse.json(
           { error: error.message },
           { status: 409 }
+        )
+      }
+
+      if (error.message === 'Password must be at least 6 characters long') {
+        return NextResponse.json(
+          { error: error.message },
+          { status: 400 }
         )
       }
     }

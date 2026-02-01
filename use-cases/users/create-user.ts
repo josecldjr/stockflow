@@ -11,6 +11,11 @@ export class CreateUserUseCase {
       throw new Error('Invalid email format')
     }
 
+    // Validate password
+    if (!data.password || data.password.length < 6) {
+      throw new Error('Password must be at least 6 characters long')
+    }
+
     // Check if user already exists
     const existingUser = await this.userRepository.findByEmail(data.email)
     if (existingUser) {
