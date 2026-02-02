@@ -110,3 +110,4 @@ export const CNPJInput = React.forwardRef<HTMLInputElement, CNPJInputProps>(
 
 CNPJInput.displayName = 'CNPJInput';
 
+

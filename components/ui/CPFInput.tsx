@@ -102,3 +102,4 @@ export const CPFInput = React.forwardRef<HTMLInputElement, CPFInputProps>(
 
 CPFInput.displayName = 'CPFInput';
 
+

@@ -129,3 +129,4 @@ apiEndpoints.organizations.list; // '/api/organizations'
 - ✅ Centralized endpoint management
 - ✅ Works with Next.js API routes
 
+
